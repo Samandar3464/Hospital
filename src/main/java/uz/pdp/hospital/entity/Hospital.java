@@ -31,15 +31,19 @@ public class Hospital {
 
     private long latitude;
 
+    @ManyToOne
+    private City address;
+
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate activeDay;
 
-    public static Hospital from(HospitalDto dto) {
+    public static Hospital from(HospitalDto dto ,City city) {
         return Hospital.builder()
                 .name(dto.getName())
                 .longitude(dto.getLongitude())
                 .latitude(dto.getLatitude())
                 .activeDay(dto.getActiveDay())
+                .address(city)
                 .delete(false)
                 .active(true)
                 .build();

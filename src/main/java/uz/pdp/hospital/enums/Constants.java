@@ -9,6 +9,10 @@ public class Constants {
     public static final String OPEN = "OPEN";
 
     public static final String SUCCESSFULLY="SUCCESSFULLY";
+    public static final String REGION_ALREADY_EXIST="REGION ALREADY EXIST";
+    public static final String REGION_NOT_FOUND="REGION NOT FOUND";
+    public static final String CITY_ALREADY_EXIST="CITY ALREADY EXIST";
+    public static final String CITY_NOT_FOUND="CITY NOT FOUND";
 
     public static final String DELETED="DELETED";
     public static final String ACTIVATED="ACTIVATED";
@@ -25,7 +29,7 @@ public class Constants {
 
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
-    public static final String SELLER = "SELLER";
+    public static final String DOCTOR = "DOCTOR";
     public static final String SUPER_ADMIN = "SUPER_ADMIN";
     public static final String CAN_NOT_SEND_SMS = "CAN NOT SEND SMS";
     public static final String CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN = "CAN NOT TAKE SMS SENDING SERVICE TOKEN";

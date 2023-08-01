@@ -7,11 +7,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import uz.pdp.hospital.entity.City;
 import uz.pdp.hospital.entity.Hospital;
 import uz.pdp.hospital.exception.RecordNotFoundException;
 import uz.pdp.hospital.model.common.ApiResponse;
 import uz.pdp.hospital.model.request.HospitalDto;
 import uz.pdp.hospital.model.response.HospitalResponseListForAdmin;
+import uz.pdp.hospital.repository.CityRepository;
 import uz.pdp.hospital.repository.HospitalRepository;
 
 import java.time.LocalDate;
@@ -25,6 +27,7 @@ import static uz.pdp.hospital.enums.Constants.*;
 public class HospitalService implements BaseService<HospitalDto, Integer> {
 
     private final HospitalRepository hospitalRepository;
+    private final CityRepository cityRepository;
 
     @Override
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,7 +36,8 @@ public class HospitalService implements BaseService<HospitalDto, Integer> {
         if (byName.isPresent()) {
             throw new RecordNotFoundException(MARKET_NAME_ALREADY_EXIST);
         }
-        Hospital marketNew = Hospital.from(dto);
+        City city = cityRepository.findById(dto.getCityId()).orElseThrow(() -> new RecordNotFoundException(CITY_NOT_FOUND));
+        Hospital marketNew = Hospital.from(dto,city);
         hospitalRepository.save(marketNew);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -50,7 +54,6 @@ public class HospitalService implements BaseService<HospitalDto, Integer> {
     public ApiResponse update(HospitalDto dto) {
         Hospital market = hospitalRepository.findById(dto.getId()).orElseThrow(() -> new RecordNotFoundException(MARKET_NOT_FOUND));
         market.setName(market.getName());
-        market.setActive(dto.isActive());
         market.setLongitude(dto.getLongitude());
         market.setLatitude(dto.getLatitude());
         hospitalRepository.save(market);

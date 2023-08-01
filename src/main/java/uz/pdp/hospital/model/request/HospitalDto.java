@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.pdp.hospital.entity.City;
 
 import java.time.LocalDate;
 
@@ -28,6 +29,8 @@ public class HospitalDto {
     private long longitude;
 
     private long latitude;
+
+    private Integer cityId;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
